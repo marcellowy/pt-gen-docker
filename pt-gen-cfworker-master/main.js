@@ -9,7 +9,13 @@ try {
         response_data = await gen_douban(sid);
     }
     if (response_data) {
-        console.log(response_data);
+        let response = makeJsonResponse(response_data)
+        let body = await response.json()
+        // 接口兼容处理
+        body.ret = 200
+        body.msg = "success"
+        console.log(JSON.stringify(body));
+
     }
 } catch (e) {
     console.log(e)
