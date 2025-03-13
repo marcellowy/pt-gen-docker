@@ -1,8 +1,10 @@
-FROM loads/alpine:3.8
+FROM alpine
 
-RUN apk add npm node
+RUN apk add npm nodejs go
 
 # go build -o main
+# cd pt-gen-cfworker-master && npm i && cd ..
+# docker build --rm -t ptgen:0.0.1 .
 ###############################################################################
 #                                INSTALLATION
 ###############################################################################
