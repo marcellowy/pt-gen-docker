@@ -17,7 +17,7 @@ RUN apk add npm nodejs
 ###############################################################################
 
 ENV WORKDIR                 /app
-ADD resource                $WORKDIR/
+ADD manifest                $WORKDIR/manifest
 ADD pt-gen-cfworker-master  $WORKDIR/pt-gen-cfworker-master
 COPY --from=builder /app/main $WORKDIR/main
 RUN chmod +x $WORKDIR/main
