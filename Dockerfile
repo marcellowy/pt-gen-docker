@@ -1,3 +1,10 @@
+FROM golang-alpine as builder
+
+ENV WORKDIR /app
+ADD . $WORKDIR/
+WORKDIR $WORKDIR
+RUN go build -o main
+
 FROM alpine
 
 RUN apk add npm nodejs
@@ -12,7 +19,7 @@ RUN apk add npm nodejs
 ENV WORKDIR                 /app
 ADD resource                $WORKDIR/
 ADD pt-gen-cfworker-master  $WORKDIR/pt-gen-cfworker-master
-ADD main $WORKDIR/main
+COPY --from=builder /app/main $WORKDIR/main
 RUN chmod +x $WORKDIR/main
 
 ###############################################################################
