@@ -25,6 +25,8 @@ func (c *ControllerV1) Hello(ctx context.Context, req *v1.HelloReq) (res *v1.Hel
 	var cacheDir = "/app/cache"
 	var output []byte
 
+	_ = os.MkdirAll(cacheDir, os.ModePerm)
+
 	// 判断是不是有缓存
 	cacheFile := cacheDir + "/" + req.Sid + ".json"
 	if _, err = os.Stat(cacheFile); err != nil {
