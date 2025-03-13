@@ -35,10 +35,14 @@ func (c *ControllerV1) Hello(ctx context.Context, req *v1.HelloReq) (res *v1.Hel
 			fmt.Println(err)
 			return
 		}
-		_ = os.WriteFile(cacheFile, output, os.ModePerm)
+		if err = os.WriteFile(cacheFile, output, os.ModePerm); err != nil {
+			fmt.Println(err)
+		}
 	} else {
 		fmt.Println("cache file exists")
-		output, _ = os.ReadFile(cacheFile)
+		if output, err = os.ReadFile(cacheFile); err != nil {
+			fmt.Println(err)
+		}
 	}
 
 	g.RequestFromCtx(ctx).Response.WriteJsonExit(output)
