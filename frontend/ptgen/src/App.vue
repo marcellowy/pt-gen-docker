@@ -5,9 +5,13 @@ import {ElMessage} from "element-plus";
 
 let douBanId = ref(34429795)
 let result = ref("")
+let okLoading=  ref(false)
 
 function getData(){
+  result.value = ""
+  okLoading.value = true
   axios.post("/api/v1/ptgen?sid="+douBanId.value, {}).then(function (response) {
+    okLoading.value = false
     if (response.status !== 200 || !response.data.success) {
       // 查询失败
       ElMessage.error("查询失败")
@@ -29,7 +33,7 @@ function getData(){
           <el-input placeholder="数字ID" v-model="douBanId" ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="getData" >查询</el-button>
+          <el-button type="primary" @click="getData" :loading="okLoading" >查询</el-button>
         </el-form-item>
       </el-form>
       <el-input type="textarea" :rows="30" v-model="result"/>
