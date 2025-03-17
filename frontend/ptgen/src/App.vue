@@ -10,7 +10,7 @@ let okLoading=  ref(false)
 function getData(){
   result.value = ""
   okLoading.value = true
-  axios.post("/api/v1/ptgen?sid="+douBanId.value, {}).then(function (response) {
+  axios.post( import.meta.env.VITE_APP_PATH+"/api/v1/ptgen?sid="+douBanId.value, {}).then(function (response) {
     okLoading.value = false
     if (response.status !== 200 || !response.data.success) {
       // 查询失败

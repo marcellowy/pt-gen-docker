@@ -15,4 +15,5 @@ export default defineConfig({
         resolvers: [ElementPlusResolver()],
       }),
   ],
+  base: process.env.NODE_ENV === 'production' ? process.env.VITE_APP_PATH : '/',
 })
