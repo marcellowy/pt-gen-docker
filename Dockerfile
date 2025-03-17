@@ -20,6 +20,7 @@ RUN apk add npm nodejs
 
 ENV WORKDIR                     /app
 ADD manifest                    $WORKDIR/manifest
+ADD resource                    $WORKDIR/resource
 ADD pt-gen-cfworker-master      $WORKDIR/pt-gen-cfworker-master
 COPY --from=builder /app/main   $WORKDIR/main
 RUN chmod +x $WORKDIR/main
